@@ -65,6 +65,8 @@ if __name__=="__main__":
                     print("converting sdf to mol2")
                     smiles_string = convert_sdf_to_smiles(unprocessed_ligand_sdf_file)
                     mol2path = smiles_2_3d_mol2(smiles_string, unprocessed_ligand_sdf_file)
+                    if not os.path.exists(mol2path):
+                        print("Failed to create mol2 file")
                 else:
                     mol2path = mol2path[0]
                     print(f"found existing mol2 file: {mol2path}")
