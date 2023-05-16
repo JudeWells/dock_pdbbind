@@ -29,7 +29,7 @@ def smiles_2_3d_mol2(smiles_string, out_path):
     # cmd_ = f"obabel {out_path}.smi -O {out_path}.mol2 --gen3d --best --canonical --conformers --weighted --nconf 50 --ff GAFF"
     # print(cmd_)
     subprocess.call(["obabel",
-                     f"{out_path}.smi",
+                     f"{out_path}",
                      "-O", f"{out_path}.mol2",
                      "--gen3d",
                         "--best",
@@ -52,6 +52,8 @@ if __name__=="__main__":
     task_index = int(sys.argv[1])
     batch_size = 100
     data_dir = "/SAN/orengolab/nsp13/dock_pdbbind/PDBbind/PDBBind_processed"
+    if not os.path.exists(data_dir):
+        data_dir = "/Users/judewells/Documents/dataScienceProgramming/data_for_protein_ligand/PDBbind/PDBBind_processed"
     print(f"data_dir: {data_dir}")
     for pdbid in sorted(os.listdir(data_dir))[task_index*batch_size:(task_index+1)*batch_size]:
         pdbid_path = os.path.join(data_dir, pdbid)
