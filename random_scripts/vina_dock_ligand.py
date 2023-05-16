@@ -1,7 +1,7 @@
 """
 Created by Jude Wells 2023-05-15
 this script is made to run autodock vina on PDBbind data
-it assumes that you have mol2 files and pdbqt files for the receptor
+we assume that proteins have been cleaned (remove waters etc)
 """
 
 import os
