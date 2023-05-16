@@ -52,7 +52,7 @@ def convert_sdf_to_smiles(sdf_file):
     return None
 
 if __name__=="__main__":
-    task_index = int(sys.argv[1])
+    task_index = int(sys.argv[1]) -1
     batch_size = 100
     data_dir = "/SAN/orengolab/nsp13/dock_pdbbind/PDBbind/PDBBind_processed"
     if not os.path.exists(data_dir):
@@ -63,8 +63,9 @@ if __name__=="__main__":
         if os.path.isdir(pdbid_path):
             try:
                 print(f"pdbid_path: {pdbid_path}")
-                mol2path = glob.glob(f"{pdbid_path}/*_ligand.sdf.mol2")
                 unprocessed_ligand_sdf_file = glob.glob(f"{pdbid_path}/*_ligand.sdf")[0]
+                mol2path = glob.glob(f"{pdbid_path}/*_ligand.sdf.mol2")
+
 
                 if len(mol2path)==0:
                     print("converting sdf to mol2")
