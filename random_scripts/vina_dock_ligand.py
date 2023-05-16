@@ -23,14 +23,17 @@ def calculate_bounding_box(sdf_file):
             return center, sizes
     return None
 
-def smiles_2_3d_mol2(smiles_string, out_path):
-    with open(out_path + ".smi", "w") as f:
+def smiles_2_3d_mol2(smiles_string, sdf_path):
+    smiles_path = sdf_path + '.smi'
+    with open(smiles_path, "w") as f:
         f.write(smiles_string + "\n")
     # cmd_ = f"obabel {out_path}.smi -O {out_path}.mol2 --gen3d --best --canonical --conformers --weighted --nconf 50 --ff GAFF"
     # print(cmd_)
+    if not os.path.exists(smiles_path):
+        print(f"Ligand smiles path not found {smiles_path}")
     subprocess.call(["obabel",
-                     f"{out_path}",
-                     "-O", f"{out_path}.mol2",
+                     f"{smiles_path}",
+                     "-O", f"{sdf_path}.mol2",
                      "--gen3d",
                         "--best",
                         "--canonical",
@@ -39,7 +42,7 @@ def smiles_2_3d_mol2(smiles_string, out_path):
                         "--nconf", "50",
                         "--ff", "GAFF"
                      ])
-    return out_path + ".mol2"
+    return sdf_path + ".mol2"
 
 def convert_sdf_to_smiles(sdf_file):
     suppl = Chem.SDMolSupplier(sdf_file)
