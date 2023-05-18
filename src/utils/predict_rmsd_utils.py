@@ -2,10 +2,10 @@ import os
 import torch
 import json
 
-def basic_save_model(learner, config, metrics={}):
+def basic_save_model(model, config, metrics={}):
     save_dir = os.path.join(config["checkpoint_dir"], config["experiment_name"])
     os.makedirs(save_dir, exist_ok=True)
-    torch.save(learner.model.state_dict(), os.path.join(*[save_dir, f'weights.pt']))
+    torch.save(model.state_dict(), os.path.join(*[save_dir, f'weights.pt']))
     with open(os.path.join(save_dir, 'config.json'), 'w') as f:
         json.dump(config, f)
     with open(os.path.join(save_dir, 'metrics.json'), 'w') as f:

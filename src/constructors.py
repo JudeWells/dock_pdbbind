@@ -1,16 +1,22 @@
+import os
+
 import torch
 import wandb
 from src.data import BaseDataset
 
 def build_data_loaders(data_config):
+    if os.getcwd().startswith("/Users/judewells"):
+        data_dir = "/Users/judewells/Documents/dataScienceProgramming/data_for_protein_ligand"
+    else:
+        data_dir = "/SAN/orengolab/nsp13/data_for_protein_ligand"
     train_path = data_config.get('train_path',
-                                   "/Users/judewells/Documents/dataScienceProgramming/data_for_protein_ligand/ECIFs/train.csv")
+                                   f"{data_dir}/ECIFs/train.csv")
     val_path = data_config.get('val_path',
-                                    "/Users/judewells/Documents/dataScienceProgramming/data_for_protein_ligand/ECIFs/val.csv")
+                                    f"{data_dir}/ECIFs/val.csv")
     test_path = data_config.get('test_path',
-                                     "/Users/judewells/Documents/dataScienceProgramming/data_for_protein_ligand/ECIFs/test.csv")
+                                     f"{data_dir}/ECIFs/test.csv")
     label_path = data_config.get('label_path',
-                                 "/Users/judewells/Documents/dataScienceProgramming/dock_pdbbind/pdb_bind.csv")
+                                 "pdb_bind.csv")
 
     data_loaders = []
 

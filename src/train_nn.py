@@ -28,9 +28,9 @@ def evaluate_model(model, data_loader, data_loader_name):
             y.append(y_)
         y_hat = torch.cat(y_hat)
         y = torch.cat(y)
-        mse = torch.nn.functional.mse_loss(y_hat, y)
+        mse = float(torch.nn.functional.mse_loss(y_hat, y).detach())
         r2 = r2_score(y.detach().numpy(), y_hat.detach().numpy())
-        mae = torch.nn.functional.l1_loss(y_hat, y)
+        mae = float(torch.nn.functional.l1_loss(y_hat, y).detach())
         metrics = {f"{data_loader_name}_mse": mse, f"{data_loader_name}_r2": r2, f"{data_loader_name}_mae": mae}
         print(f"{data_loader_name} MSE: {mse}, R2: {r2}, MAE: {mae}")
         if r2 > model.best_val:
