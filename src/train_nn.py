@@ -43,7 +43,7 @@ if __name__ == "__main__":
     all_configs = first_run()
     try:
         task_index = int(sys.argv[1]) -1
-        all_configs = all_configs[task_index]
+        all_configs = [all_configs[task_index]]
     except:
         pass
     for i, config in enumerate(all_configs):
