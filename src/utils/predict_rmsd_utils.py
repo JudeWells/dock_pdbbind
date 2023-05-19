@@ -3,7 +3,7 @@ import torch
 import json
 
 def basic_save_model(model, config, metrics={}):
-    save_dir = os.path.join(config["checkpoint_dir"], config["experiment_name"])
+    save_dir = os.path.join(config["checkpoint_dir"], config["experiment_name"] + f"_cuda_{torch.cuda.is_available()}")
     os.makedirs(save_dir, exist_ok=True)
     torch.save(model.state_dict(), os.path.join(*[save_dir, f'weights.pt']))
     with open(os.path.join(save_dir, 'config.json'), 'w') as f:
